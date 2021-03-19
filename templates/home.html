@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!--<input lang="en">-->
+<head>
+
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+
+    <script>
+
+<!--    window.onload = function(){-->
+<!--    var hou = 2;-->
+<!--    var sec = 60;-->
+<!--    setInterval(function(){-->
+<!--    var a = new Date();-->
+<!--        document.getElementById("timer").innerHTML = hou +" : " + sec ;-->
+<!--        sec--;-->
+<!--        if(sec == 00)-->
+<!--        {-->
+<!--            hou--;-->
+<!--            sec = 60;-->
+<!--            if (hou == 0)-->
+<!--            {-->
+<!--                hou = 2;-->
+<!--            }-->
+<!--        }-->
+<!--        },1000);-->
+<!--}-->
+
+    </script>
+
+</head>
+<!--<body>-->
+<p align="right">'Logged in as ' {{content}}'<br> <b><a href = '/logout'>click here to log out</a></b></p>
+<br>
+<!--<div>-->
+<!--    Quiz ends in <span id="timer">03:00</span> minutes!-->
+<!--</div>-->
+<br>
+<body>
+
+<form method="post" action="/check">
+{% for i, j in data.items() %}
+    {% print(" "+i) %}
+    <br>
+    {% for k in range(j|length) %}
+<input type="radio" name="{% print(i) %}" value="{% print(j[k]) %}">{% print(j[k]) %}
+        <br>
+        {% print(" ") %}
+    {% endfor %}
+{% print(" ") %}
+<br>
+<br>
+{% endfor %}
+    <br>
+    <button type="Submit" name="Submit Answer" value="Submit Answer">Submit Answer</button>
+
+</form>
+</body>
+</html>

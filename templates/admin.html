@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Page</title>
+     <style>
+table, th, td {
+  border: 4px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+</head>
+<p align="right">'Logged in as ' {{content}}'<br> <b><a href = '/logout'>click here to log out</a></b></p>
+<br>
+{% with messages = get_flashed_messages(category_filter=["error"]) %}
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-danger" role="alert">
+                <p>{{msg}}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+{% endwith %}
+{% with messages = get_flashed_messages(category_filter=["success"]) %}
+        {% if messages %}
+            {% for msg in messages %}
+            <div class="alert alert-success" role="alert">
+                <p>{{msg}}</p>
+            </div>
+            {% endfor %}
+        {% endif %}
+{% endwith %}
+<body>
+<p>You can add new questions here</p>
+<br>
+<form method="post" action="/createq">
+    Enter Question : &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="question" name="question" size="100" required="True">
+    <br>
+    <br>
+    Enter Option1: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="opt1" name="opt1" size="50" required="True">
+    <br>
+    <br>
+    Enter Option2: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="opt2" name="opt2" size="50" required="True">
+    <br>
+    <br>
+    Enter Option3: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="opt3" name="opt3" size="50" required="True">
+    <br>
+    <br>
+    Enter Option4: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="opt4" name="opt4" size="50" required="True">
+    <br>
+    <br>
+    Enter Answer: &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="ans" name="ans" size="50" required="True">
+    <br>
+    <br>
+    <input type="submit" name="Add Question" value="Add Question">
+<br>
+    <br>
+</form>
+<div>
+    <a href="/scores">Check Scores!</a>
+</div>
+<br>
+<br>
+<form method="post" action="deleteq">
+<table>
+    <tr>
+        <th>Question</th>
+        <th>Options</th>
+        <th>Delete?</th>
+    </tr>
+    {% for i, j in data.items() %}
+    <tr>
+        <td>{% print (i) %}</td>
+        <td>{% print (j) %}</td>
+        <td><button type="Submit" value="{% print(i) %}" name="delete">Delete</td>
+    </tr>
+    {% endfor %}
+
+</table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+table, th, td {
+  border: 4px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+</style>
+    <meta charset="UTF-8">
+    <title>Quiz Scores</title>
+</head>
+
+<body>
+<p>You have already taken the Quiz! Check your standings below:</p>
+<br>
+<table>
+    <tr>
+        <th>User Email Address</th>
+        <th>Score</th>
+    </tr>
+    {% for i in range(content|length) %}
+    <tr>
+        <td>{% print content[i][0] %}</td>
+        <td>{% print content[i][1] %}</td>
+    </tr>
+    {% endfor %}
+
+</table>
+<br>
+<br>
+<a href = '/logout'>click here to log out</a>
+</body>
+</html>
