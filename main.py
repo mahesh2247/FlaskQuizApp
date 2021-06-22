@@ -295,7 +295,21 @@ def createq():
             db.session.add(questionquery)
             db.session.commit()
             flash('Successfully added question!', 'success')
-            return render_template("admin.html")
+            con = sqlite3.connect("database.db")
+            cur = con.cursor()
+            new_tup = ()
+            for row in cur.execute("SELECT question, option1, option2, option3, option4 FROM question_model;"):
+                new_tup += (row,)
+            my_dict = {}
+            new_tup2 = ()
+            k = 0
+            for i in range(len(new_tup)):
+                for j in range(1, 5):
+                    new_tup2 += (new_tup[i][j],)
+
+                my_dict[new_tup[i][k]] = new_tup2
+                new_tup2 = ()
+            return render_template("admin.html", data=my_dict)
 
 
 @app.route("/deleteq", methods=["GET", "POST"])
